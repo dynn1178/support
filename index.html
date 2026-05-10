@@ -135,11 +135,11 @@
   /* hero visual */
   .stage{
     position:relative;
-    aspect-ratio: 4/3;
+    aspect-ratio: 886 / 571;
     perspective:1600px;
   }
   .device{
-    position:absolute;inset:6% 0 0 0;
+    position:absolute;inset:3% 0 0 0;
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:18px;
@@ -148,7 +148,7 @@
     transform:rotateX(2deg) rotateY(-6deg) rotateZ(.4deg);
     transform-origin:center center;
   }
-  .device img{width:100%;height:auto;display:block}
+  .device img{width:100%;height:100%;display:block;object-fit:contain;background:#EDF0F5}
   .float{
     position:absolute;background:var(--surface);border:1px solid var(--border);
     border-radius:12px;box-shadow:var(--shadow-2);padding:12px 14px;
@@ -242,19 +242,38 @@
   @media (max-width:900px){.tour-grid{grid-template-columns:1fr;gap:24px}}
   .tabs{display:flex;flex-direction:column;gap:4px;position:sticky;top:88px}
   @media (max-width:900px){
-    .tabs{flex-direction:row;overflow-x:auto;position:static;padding-bottom:8px;gap:8px}
+    .tabs{flex-direction:row;overflow-x:auto;position:static;padding-bottom:8px;gap:8px;align-items:flex-start}
     .tabs::-webkit-scrollbar{display:none}
   }
+  .tab-group{border:1px solid transparent;border-radius:12px;padding:4px}
+  .tab-group.active{background:rgba(255,255,255,.45);border-color:var(--border)}
+  .tab-main{
+    width:100%;border:0;background:transparent;
+    display:flex;align-items:center;gap:10px;justify-content:space-between;
+    padding:10px 12px 8px;color:var(--ink);font-size:13px;font-weight:700;
+    white-space:nowrap;cursor:pointer;border-radius:9px;
+  }
+  .tab-main:hover{background:var(--surface)}
+  .tab-main .tnum{font:600 11px/1 "JetBrains Mono",monospace;color:var(--accent-ink);width:20px}
+  .tab-main .main-label{display:flex;align-items:center;gap:10px}
+  .tab-main .chev{color:var(--ink-3);font-size:11px;transition:transform .15s ease}
+  .tab-group.active .tab-main .chev{transform:rotate(90deg);color:var(--accent-ink)}
+  .subtabs{display:none;flex-direction:column;gap:3px;padding-top:3px}
+  .tab-group.active .subtabs{display:flex}
   .tab{
-    text-align:left;padding:14px 16px;border-radius:10px;
-    color:var(--ink-2);font-size:14px;font-weight:500;
+    text-align:left;padding:10px 12px;border-radius:9px;
+    color:var(--ink-2);font-size:13px;font-weight:500;
     border:1px solid transparent;display:flex;align-items:center;gap:12px;
     transition:all .15s;white-space:nowrap;
   }
-  .tab .tnum{font:500 11px/1 "JetBrains Mono",monospace;color:var(--ink-3);width:18px}
+  .tab .tnum{font:500 11px/1 "JetBrains Mono",monospace;color:var(--ink-3);width:22px}
   .tab:hover{background:var(--surface);color:var(--ink)}
   .tab.active{background:var(--surface);border-color:var(--border-2);color:var(--ink);font-weight:600;box-shadow:var(--shadow-1)}
   .tab.active .tnum{color:var(--accent-ink)}
+  @media (max-width:900px){
+    .tab-group{min-width:max-content}
+    .subtabs{min-width:150px}
+  }
 
   .tour-panel{
     background:var(--surface);border:1px solid var(--border);border-radius:18px;
@@ -262,9 +281,10 @@
     position:relative;overflow:hidden;
   }
   .tour-panel .pic{
-    border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff;
+    border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#EDF0F5;
+    aspect-ratio:886 / 571;
   }
-  .tour-panel img{width:100%;height:auto}
+  .tour-panel img{width:100%;height:100%;object-fit:contain}
   .tour-caption{padding:18px 12px 8px;display:flex;justify-content:space-between;align-items:flex-end;gap:18px}
   .tour-caption h4{margin:0;font-size:18px;font-weight:700;letter-spacing:-.015em}
   .tour-caption p{margin:6px 0 0;color:var(--ink-2);font-size:14px;max-width:480px}
@@ -307,6 +327,37 @@
     font-family:"Pretendard","JetBrains Mono",monospace;
   }
   .demo-card .out .gr{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600}
+  .usecases{
+    margin-top:28px;
+    display:grid;grid-template-columns:260px 1fr;gap:18px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;padding:18px;
+  }
+  .usecase-tabs{display:flex;flex-direction:column;gap:8px}
+  .usecase-tab{
+    text-align:left;border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.04);color:rgba(255,255,255,.72);
+    border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;
+    transition:background .15s,border-color .15s,color .15s;
+  }
+  .usecase-tab:hover{background:rgba(255,255,255,.08);color:#fff}
+  .usecase-tab.active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#fff}
+  .usecase-panel{
+    display:none;min-height:176px;
+    background:rgba(0,0,0,.26);border:1px dashed rgba(255,255,255,.14);
+    border-radius:12px;padding:18px;
+  }
+  .usecase-panel.show{display:block}
+  .usecase-panel h3{margin:0 0 8px;font-size:18px;letter-spacing:-.015em;color:#fff}
+  .usecase-panel p{margin:0;color:rgba(255,255,255,.72);font-size:14px;line-height:1.65;max-width:720px}
+  .usecase-flow{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .usecase-flow span{
+    display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);
+    color:#EFEAFB;font-size:12px;font-weight:600;
+  }
+  @media (max-width:760px){.usecases{grid-template-columns:1fr}.usecase-tabs{flex-direction:row;overflow-x:auto}.usecase-tab{white-space:nowrap}}
   .caret{display:inline-block;width:7px;height:1em;background:#C8BEFB;margin-left:1px;vertical-align:-2px;animation:blink 1s steps(2,end) infinite}
   @keyframes blink{50%{opacity:0}}
 
@@ -488,13 +539,13 @@
       </div>
     </a>
     <nav class="nav-links">
-      <a href="#features">기능</a>
-      <a href="#tour">스크린샷</a>
-      <a href="#hotkeys">단축키</a>
+      <a href="#features">도구</a>
+      <a href="#benefits">특장점</a>
+      <a href="#tour">화면</a>
       <a href="#download">다운로드</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-primary btn-sm" href="https://github.com/dynn1178/support_cdx/releases/download/v1.0.14/6PM.Assistant.exe">
+      <a class="btn btn-primary btn-sm" href="https://github.com/dynn1178/support_cdx/releases/latest/download/6PM.Assistant.exe">
         다운로드 <span class="arrow">↓</span>
       </a>
     </div>
@@ -518,16 +569,16 @@
         <span class="gr" style="font-size:70px">정시 퇴근은 습관으로.</span>
       </h1>
       <p class="lede">상용구·코드 스니펫·바로가기·매크로·클립보드·계산기·메모·일정까지 —  
-일하는 데 필요한 20여 가지 도구를 편리하게 활용하세요.</p>
+일하는 데 필요한 약 30개 도구를 편리하게 활용하세요.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://github.com/dynn1178/support_cdx/releases/download/v1.0.14/6PM.Assistant.exe">
+        <a class="btn btn-primary" href="https://github.com/dynn1178/support_cdx/releases/latest/download/6PM.Assistant.exe">
           Windows용 다운로드 <span class="arrow">↓</span>
         </a>
         <a class="btn btn-ghost" href="#features">기능 둘러보기 →</a>
       </div>
       <div class="hero-meta">
         <span>Windows 10 / 11 전용</span>
-        <span>약 25 MB</span>
+        <span>약 57 MB</span>
         <span class="mono">
 </span>
       </div>
@@ -536,7 +587,7 @@
     <div>
       <div class="stage">
         <div class="device">
-          <img src="assets/shot-home.png" alt="6pm Assistant 메인 화면">
+          <img src="assets/01_home.jpg" alt="6pm Assistant 메인 화면">
         </div>
 
         <div class="float f1">
@@ -571,10 +622,10 @@
 <!-- ─────────────────────────── STRIP ─────────────────────────── -->
 <section class="strip" style="padding:32px 0">
   <div class="wrap strip-grid">
-    <div><div class="num"><span class="gr">20</span></div><div class="lab">탑재된 도구</div></div>
+    <div><div class="num"><span class="gr">30</span></div><div class="lab">약 30개 도구</div></div>
     <div><div class="num"><span class="gr">∞</span></div><div class="lab">사용자 정의 단축키</div></div>
     <div><div class="num"><span class="gr">0₩</span></div><div class="lab">완전 무료</div></div>
-    <div><div class="num"><span class="gr">25MB</span></div><div class="lab">가벼운 설치</div></div>
+    <div><div class="num"><span class="gr">57MB</span></div><div class="lab">가벼운 설치</div></div>
   </div>
 </section>
 
@@ -582,98 +633,162 @@
 <section id="features">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">FEATURES</span>
-      <h2 class="h">반복되는 업무, 한 번만 등록해 두세요.</h2>
-      <p class="h-sub">자주 쓰는 답변, 코드, 사이트, 파일, 이미지, 일정까지 —<br>6pm Assistant 하나로 정리하고 단축키로 호출합니다.</p>
+      <span class="section-eyebrow">TOOLS</span>
+      <h2 class="h">업무 흐름에 필요한 도구를 한곳에 모았습니다.</h2>
+      <p class="h-sub">상용구부터 바로가기, 클립보드, 일정, 피커, 설정까지 약 30개 도구를 필요할 때 바로 꺼내 쓸 수 있습니다.</p>
     </div>
 
     <div class="features">
-
       <div class="feat lg">
-        <span class="num">01 / SNIPPETS</span>
-        <h3>상용구 · 코드 스니펫 · 핫스트링</h3>
-        <p>자주 쓰는 문구, 답변, 코드, 날짜 형식을 저장하고 단축키 한 번에 붙여넣기.<br>즐겨찾기(★)는 Ctrl + ; 미니팝업에서 바로 호출됩니다.</p>
+        <span class="num">01 / QUICK CALL</span>
+        <h3>상용구 · 코드 · 핫스트링</h3>
+        <p>일반 텍스트, 코드 스니펫, 제목 생성, 핫스트링을 저장해 반복 입력을 줄입니다. 즐겨찾기는 미니팝업으로 바로 호출됩니다.</p>
         <div class="demo">
-          <div class="demo-row"><span class="l">★ 안녕하세요, 6PM Assistant…</span><span class="r"><span class="key">Alt</span><span class="key">F1</span></span></div>
-          <div class="demo-row"><span class="l">금일 <span class="mono" style="color:var(--accent-ink)">{yyyy-mm-dd}</span></span><span class="r"><span class="key">Shift</span><span class="key">F1</span></span></div>
-          <div class="demo-row"><span class="l">엑셀 단축키 컨닝페이퍼</span><span class="r"><span class="key">Ctrl</span><span class="key">Alt</span><span class="key">F1</span></span></div>
+          <div class="demo-row"><span class="l">상용구 미니팝업</span><span class="r"><span class="key">Ctrl</span><span class="key">;</span></span></div>
+          <div class="demo-row"><span class="l">개별 상용구 호출</span><span class="r"><span class="key">Custom</span></span></div>
+          <div class="demo-row"><span class="l">핫스트링 자동 치환</span><span class="r"><span class="key">Text</span></span></div>
         </div>
       </div>
 
       <div class="feat lg">
-        <span class="num">02 / SHORTCUTS</span>
-        <h3>사이트 · 파일 · 폴더 바로가기</h3>
-        <p>자주 가는 사이트와 폴더, 파일을 등록하고 단축키 한 번으로 열기.<br>사이트는 저장한 아이디·비밀번호를 함께 복사해 줍니다.</p>
+        <span class="num">02 / WORK HUB</span>
+        <h3>바로가기 · 파일 · 검색 · 컨닝페이퍼</h3>
+        <p>사이트, 파일, 폴더, 바로검색, 이미지 자료를 등록해 두고 업무 중 필요한 자료를 빠르게 불러옵니다.</p>
         <div class="demo">
-          <div class="demo-row"><span class="l">🔗 공식 사이트 — finishwork / ontime</span><span class="r"><span class="key">Ctrl</span><span class="key">1</span></span></div>
-          <div class="demo-row"><span class="l">📁 자주 쓰는 보고서 폴더</span><span class="r"><span class="key">Ctrl</span><span class="key">2</span></span></div>
-          <div class="demo-row"><span class="l">📄 정산 양식.xlsx</span><span class="r"><span class="key">Ctrl</span><span class="key">3</span></span></div>
+          <div class="demo-row"><span class="l">사이트 / 파일 / 폴더 열기</span><span class="r"><span class="key">Custom</span></span></div>
+          <div class="demo-row"><span class="l">바로검색 실행</span><span class="r"><span class="key">Custom</span></span></div>
+          <div class="demo-row"><span class="l">스틸 컷 캡처</span><span class="r"><span class="key">Ctrl</span><span class="key">Shift</span><span class="key">S</span></span></div>
         </div>
       </div>
 
       <div class="feat">
         <span class="num">03</span>
-        <h3>컨닝페이퍼</h3>
-        <p>이미지·캡처·URL을 등록해 두고 필요할 때 띄워 참고하세요. 회의 KPI, 단축키표, 조직도 등에 적합합니다.</p>
-        <div class="hint">캡처 / URL / 파일 입력 지원</div>
+        <h3>클립보드</h3>
+        <p>복사했던 텍스트와 이미지를 보관하고 미니팝업에서 다시 선택해 붙여넣을 수 있습니다.</p>
+        <div class="hint"><span class="key">Ctrl</span><span style="color:var(--ink-3)">×</span><span class="key">2</span></div>
       </div>
       <div class="feat">
         <span class="num">04</span>
-        <h3>매크로</h3>
-        <p>키 입력·클릭 시퀀스를 녹화해 단축키로 재생합니다.<br>단순 반복 클릭 작업을 한 번의 입력으로 편하게 처리하세요.</p>
-        <div class="hint">녹화 · 재생 · 속도 조절</div>
+        <h3>메모</h3>
+        <p>빠른 메모를 저장하고, 필요한 메모는 스티커처럼 화면에 띄워 계속 확인할 수 있습니다.</p>
+        <div class="hint"><span class="key">Alt</span><span style="color:var(--ink-3)">×</span><span class="key">2</span></div>
       </div>
       <div class="feat">
         <span class="num">05</span>
-        <h3>클립보드 미니팝업</h3>
-        <p>Ctrl 두 번으로 최근 복사한 항목을 한눈에 확인하고 골라서 붙여넣을 수 있어요.</p>
-        <div class="hint"><span class="key">Ctrl</span><span style="color:var(--ink-3)">×</span><span class="key">2</span></div>
+        <h3>일정 관리</h3>
+        <p>To Do, 그룹별 체크리스트, 마감일, 우선순위, 알림, 타이머를 한 화면에서 관리합니다.</p>
+        <div class="hint">To Do · D-Day · 타이머</div>
       </div>
 
       <div class="feat">
         <span class="num">06</span>
-        <h3>계산기</h3>
-        <p>수식과 날짜 계산을 처리하고 결과를 바로 클립보드에 복사. 계산 내역도 함께 저장됩니다.</p>
-        <div class="hint">연산 · 날짜 차이 · 환율</div>
+        <h3>매크로</h3>
+        <p>마우스와 키보드 동작을 녹화하고 반복 재생해 단순 반복 작업을 줄입니다.</p>
+        <div class="hint">녹화 · 재생 · Custom</div>
       </div>
       <div class="feat">
         <span class="num">07</span>
-        <h3>텍스트 변환</h3>
-        <p>대소문자, 공백 정리, 영↔한 변환, 따옴표/줄바꿈 정돈 등<br>자주 쓰는 텍스트 처리를 한 번에.</p>
-        <div class="hint">10+ 변환 프리셋</div>
+        <h3>계산기</h3>
+        <p>수식 계산과 날짜 계산을 처리하고 결과를 바로 복사합니다. 계산 내역도 함께 확인할 수 있습니다.</p>
+        <div class="hint">연산 계산 · 날짜 계산</div>
       </div>
       <div class="feat">
         <span class="num">08</span>
-        <h3>빠른 메모</h3>
-        <p><span class="mono">Alt</span> 더블탭으로 머릿속의 메모를 즉시 캐치.<br>검색·태그로 다시 꺼내 보세요.</p>
-        <div class="hint"><span class="key">Alt</span><span style="color:var(--ink-3)">×</span><span class="key">2</span></div>
+        <h3>텍스트 변환</h3>
+        <p>URL 인코딩, UTM 분해/조합, 줄바꿈·따옴표 정리, 대소문자 변환을 처리합니다.</p>
+        <div class="hint">URL · UTM · Case</div>
       </div>
 
       <div class="feat">
         <span class="num">09</span>
-        <h3>일정 관리 · 알림</h3>
-        <p>마감일, 우선순위, 체크박스로 할 일을 관리하고 D-Day로 자동 카운트. 알림으로 놓치지 않게.</p>
-        <div class="hint">D-Day · 우선순위 · 알림</div>
+        <h3>피커 / 기타</h3>
+        <p>컬러, 마우스 하이라이트, 이미지, 이모지, 특수문자를 한곳에서 관리합니다.</p>
+        <div class="hint">Color · Emoji · Symbol</div>
       </div>
       <div class="feat">
         <span class="num">10</span>
-        <h3>타이머 · 알림</h3>
-        <p>포모도로, 회의 타이머, 휴식 알림. 정해 둔 시간에 데스크톱<br>알림으로 알려드려요.</p>
-        <div class="hint">타이머 · 스톱워치 · 반복</div>
+        <h3>컨닝페이퍼</h3>
+        <p>자주 보는 KPI, 단축키표, 조직도 같은 이미지 자료를 저장하고 화면 위에 띄워 참고합니다.</p>
+        <div class="hint">이미지 · URL · 캡처</div>
       </div>
       <div class="feat">
         <span class="num">11</span>
-        <h3>색상 · 이모지 · 특수문자 피커</h3>
-        <p>HEX/RGB 컬러 코드, 자주 쓰는 이모지와 특수문자를<br>단축키로 호출해 바로 삽입합니다.</p>
-        <div class="hint">컬러 · 이모지 · ✓ ★ →</div>
+        <h3>설정 · 프리셋</h3>
+        <p>프리셋, 시작 옵션, 업데이트 확인, 테마, 단축키 조합을 상황에 맞게 바꿀 수 있습니다.</p>
+        <div class="hint">Preset · Theme · Custom</div>
       </div>
       <div class="feat">
         <span class="num">12</span>
-        <h3>마우스 하이라이트</h3>
-        <p>화면 공유나 시연 중 커서 위치를 강조해 시청자<br>시선을 모읍니다.</p>
-        <div class="hint">발표 · 데모 · 화면 녹화</div>
+        <h3>사용자 지정 단축키</h3>
+        <p>주요 호출 방식은 유지하면서, 개별 도구와 항목은 원하는 조합으로 변경해 사용할 수 있습니다.</p>
+        <div class="hint">시스템 호출 + Custom</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── BENEFITS ─────────────────────────── -->
+<section id="benefits" class="demo-section">
+  <div class="blob x" aria-hidden="true"></div>
+  <div class="blob y" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative">
+    <div class="section-head">
+      <span class="section-eyebrow">WHY IT MATTERS</span>
+      <h2 class="h">업무 시간을 줄이는 세 가지 방식</h2>
+      <p class="h-sub">단축키로 호출하고, 흩어진 반복 작업을 모으고, 실무 자료를 다시 쓰기 쉽게 정리합니다.</p>
+    </div>
+
+    <div class="demo-grid">
+      <div class="demo-card">
+        <h4>// QUICK CALL</h4>
+        <div class="trigger"><span class="key">Ctrl</span><span class="key">Ctrl</span><span class="key">Alt</span><span class="key">Alt</span><span class="key">Custom</span></div>
+        <div class="arrow">→ → →</div>
+        <div class="out"><span class="gr">단축키 기반 업무 호출</span><br>상용구, 사이트, 파일, 메모, 일정, 이미지 자료를 등록해 두고 키 조합이나 더블탭으로 바로 불러옵니다.</div>
+      </div>
+      <div class="demo-card">
+        <h4>// ALL-IN-ONE</h4>
+        <div class="trigger"><span class="key">Clipboard</span><span class="key">Macro</span><span class="key">Calc</span><span class="key">Picker</span></div>
+        <div class="arrow">→ → →</div>
+        <div class="out"><span class="gr">반복 작업을 한곳에 모으는 통합 도구</span><br>클립보드, 매크로, 계산기, 텍스트 변환, 피커까지 흩어진 작은 도구들을 하나의 앱에서 처리합니다.</div>
+      </div>
+      <div class="demo-card">
+        <h4>// REUSE</h4>
+        <div class="trigger"><span class="key">Ctrl</span><span class="key">;</span><span class="key">Search</span><span class="key">Template</span></div>
+        <div class="arrow">→ → →</div>
+        <div class="out"><span class="gr">실무 자료 재사용에 강함</span><br>답변 문구, 코드 스니펫, 보고 제목, 컨닝페이퍼, 바로검색처럼 자주 쓰지만 매번 다시 찾는 것들을 저장하고 재사용합니다.</div>
+      </div>
+    </div>
+
+    <div class="usecases" id="usecases">
+      <div class="usecase-tabs" aria-label="활용 예시">
+        <button class="usecase-tab active" data-case="support" type="button">고객 응대</button>
+        <button class="usecase-tab" data-case="report" type="button">보고서 작성</button>
+        <button class="usecase-tab" data-case="dev" type="button">개발/운영</button>
+        <button class="usecase-tab" data-case="meeting" type="button">회의/공유</button>
       </div>
 
+      <div>
+        <div class="usecase-panel show" data-case="support">
+          <h3>반복 답변을 빠르게 붙여넣고, 관련 사이트를 바로 엽니다.</h3>
+          <p>문의 유형별 답변 문구를 상용구로 저장하고, 고객 관리 페이지나 검색 사이트는 바로가기로 호출합니다. 복사했던 주문번호나 이미지도 클립보드에서 다시 가져올 수 있습니다.</p>
+          <div class="usecase-flow"><span>Ctrl ;</span><span>상용구 선택</span><span>사이트 바로가기</span><span>클립보드 재사용</span></div>
+        </div>
+        <div class="usecase-panel" data-case="report">
+          <h3>날짜가 들어간 제목과 보고 양식을 매번 다시 만들지 않습니다.</h3>
+          <p>월간/주간 보고 제목은 제목 생성에 등록하고, 자주 쓰는 표기나 문장은 스니펫으로 관리합니다. 계산기와 텍스트 변환으로 숫자와 URL도 바로 정리합니다.</p>
+          <div class="usecase-flow"><span>제목 생성</span><span>코드/문구 스니펫</span><span>날짜 계산</span><span>텍스트 변환</span></div>
+        </div>
+        <div class="usecase-panel" data-case="dev">
+          <h3>쿼리, 명령어, 운영 링크를 작업 맥락 안에서 꺼냅니다.</h3>
+          <p>자주 쓰는 SQL과 명령어는 코드 스니펫으로, 운영 페이지와 로그 폴더는 바로가기로 관리합니다. 반복 클릭 작업은 매크로로 줄이고, UTM/URL 정리는 변환 도구로 처리합니다.</p>
+          <div class="usecase-flow"><span>코드 스니펫</span><span>운영 링크</span><span>매크로</span><span>URL/UTM 변환</span></div>
+        </div>
+        <div class="usecase-panel" data-case="meeting">
+          <h3>회의 중 참고 자료와 화면 강조 도구를 즉시 꺼냅니다.</h3>
+          <p>KPI 캡처, 조직도, 단축키표는 컨닝페이퍼로 띄우고, 화면 설명이 필요할 때는 마우스 하이라이트를 켭니다. 회의 후 할 일은 To Do나 빠른 메모로 남깁니다.</p>
+          <div class="usecase-flow"><span>컨닝페이퍼</span><span>마우스 하이라이트</span><span>빠른 메모</span><span>To Do</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -682,214 +797,15 @@
 <section id="tour" class="tour">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">A QUICK TOUR</span>
+      <span class="section-eyebrow">PRODUCT SCREENS</span>
       <h2 class="h">한눈에 보는 6pm Assistant</h2>
-      <p class="h-sub">각 화면을 사이드바로 둘러보세요.</p>
+      <p class="h-sub">메인 메뉴를 펼쳐 각 서브메뉴 화면을 확인하세요.</p>
     </div>
 
     <div class="tour-grid">
-      <div class="tabs" id="tabs">
-        <button class="tab active" data-id="home"><span class="tnum">01</span> 홈</button>
-        <button class="tab" data-id="snippet"><span class="tnum">02</span> 상용구 / 코드</button>
-        <button class="tab" data-id="shortcut"><span class="tnum">03</span> 바로가기</button>
-        <button class="tab" data-id="cunning"><span class="tnum">04</span> 컨닝페이퍼</button>
-        <button class="tab" data-id="macro"><span class="tnum">05</span> 매크로</button>
-        <button class="tab" data-id="clipboard"><span class="tnum">06</span> 클립보드</button>
-        <button class="tab" data-id="calc"><span class="tnum">07</span> 계산기</button>
-        <button class="tab" data-id="text"><span class="tnum">08</span> 텍스트 변환</button>
-        <button class="tab" data-id="memo"><span class="tnum">09</span> 메모</button>
-        <button class="tab" data-id="todo"><span class="tnum">10</span> 일정 · 타이머</button>
-        <button class="tab" data-id="picker"><span class="tnum">11</span> 컬러·이모지 피커</button>
-      </div>
-
+      <div class="tabs" id="tabs"></div>
       <div>
-        <div class="tour-panel">
-          <div class="panel-fade show" data-id="home">
-            <div class="pic"><img src="assets/shot-home.png" alt="홈 대시보드"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>홈 — 단축키 한눈에</h4>
-                <p>등록된 단축키, 최근/자주 쓰는 항목, 다가오는 일정을 한 화면에서 확인합니다.</p>
-              </div>
-              <div class="keys-stack">
-                <div>대시보드 진입</div>
-                <div class="keys"><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Alt</span><span class="plus">+</span><span class="key">H</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="snippet">
-            <div class="pic"><img src="assets/shot-snippet.png" alt="상용구"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>상용구 / 코드 스니펫</h4>
-                <p>일반 텍스트, 코드, 제목 생성, 핫스트링 네 가지 카테고리로 정리. 즐겨찾기는 <span class="mono">Ctrl + ;</span> 미니팝업에서 바로 호출됩니다.</p>
-              </div>
-              <div class="keys-stack">
-                <div>미니팝업</div>
-                <div class="keys"><span class="key">Ctrl</span><span class="plus">+</span><span class="key">;</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="shortcut">
-            <div class="pic"><img src="assets/shot-shortcut.png" alt="바로가기"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>사이트·파일·폴더 바로가기</h4>
-                <p>자주 가는 사이트, 폴더, 파일을 등록해 단축키로 호출합니다. 사이트는 저장한 ID/PW를 함께 복사해 줘서 로그인까지 끊김 없이.</p>
-              </div>
-              <div class="keys-stack">
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="cunning">
-            <div class="pic"><img src="assets/shot-cunning.png" alt="컨닝페이퍼"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>컨닝페이퍼</h4>
-                <p style="width:600px">자주 보는 KPI, 단축키표, 조직도 같은 이미지를 저장하고 필요할 때 화면 위로 띄워 참고합니다.</p>
-              </div>
-              <div class="keys-stack">
-                <div>이미지 띄우기</div>
-                <div class="keys"><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Alt</span><span class="plus">+</span><span class="key">F1</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="calc">
-            <div class="pic"><img src="assets/shot-calc.png" alt="계산기"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>계산기</h4>
-                <p>수식과 날짜를 계산해 결과를 클립보드에 바로 복사합니다. 계산 내역도 함께 보관됩니다.</p>
-              </div>
-              <div class="keys-stack">
-                <div>계산기 호출</div>
-                <div class="keys"><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Alt</span><span class="plus">+</span><span class="key">C</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="macro">
-            <div class="pic"><img src="assets/shot-macro.png" alt="매크로"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>매크로 — 녹화 &amp; 재생</h4>
-                <p>마우스와 키보드 동작을 녹화하고 그대로 반복 재생합니다. 편집 화면에서 직접 수정도 가능해요.</p>
-              </div>
-              <div class="keys-stack">
-                <div>녹화 시작 / 정지</div>
-                <div class="keys"><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Alt</span><span class="plus">+</span><span class="key">R</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="clipboard">
-            <div class="pic"><img src="assets/shot-clipboard.png" alt="클립보드"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>클립보드 히스토리</h4>
-                <p>복사했던 텍스트와 이미지를 자동으로 보관합니다. <span class="mono">Ctrl</span>을 두 번 누르면 미니팝업으로 바로 확인하고 골라서 붙여넣기.</p>
-              </div>
-              <div class="keys-stack">
-                <div>미니팝업</div>
-                <div class="keys"><span class="key">Ctrl</span><span class="plus">×</span><span class="key">2</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="text">
-            <div class="pic"><img src="assets/shot-text.png" alt="텍스트 변환"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>텍스트 변환</h4>
-                <p>URL 인코딩/디코딩, UTM 파라미터, 줄바꿈·따옴표 정돈까지 자주 쓰는 텍스트 처리를 한 번에.</p>
-              </div>
-              <div class="keys-stack">
-                <div>변환 호출</div>
-                <div class="keys"><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Alt</span><span class="plus">+</span><span class="key">T</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="memo">
-            <div class="pic"><img src="assets/shot-memo.png" alt="메모"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>빠른 메모 · 스티커</h4>
-                <p><span class="mono">Alt</span>을 두 번 누르면 메모/일정을 즉시 등록. 스티커 버튼을 누르면 바탕화면에 띄워 두고 볼 수 있어요.</p>
-              </div>
-              <div class="keys-stack">
-                <div>빠른 메모</div>
-                <div class="keys"><span class="key">Alt</span><span class="plus">×</span><span class="key">2</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="todo">
-            <div class="pic"><img src="assets/shot-todo.png" alt="일정 관리"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>To Do · 타이머</h4>
-                <p>그룹별 체크리스트로 할 일을 관리하고 우선순위·마감일·알림을 설정. 완료 항목은 체크 한 번으로 정리됩니다.</p>
-              </div>
-              <div class="keys-stack">
-                <div>3 그룹 · 마감일 · 타이머</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-fade" data-id="picker">
-            <div class="pic"><img src="assets/shot-picker.png" alt="컬러 / 이모지 / 특수문자 피커"></div>
-            <div class="tour-caption">
-              <div>
-                <h4>컬러 · 마우스 하이라이트 · 이모지 · 특수문자</h4>
-                <p>HEX/RGB/HSL 컬러 코드, 화면에서 색 찍기, 마우스 하이라이트, 이모지·특수문자까지 — 한 패널에서 관리합니다.</p>
-              </div>
-              <div class="keys-stack">
-                <div>피커 호출</div>
-                <div class="keys"><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Alt</span><span class="plus">+</span><span class="key">P</span></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────── HOTKEY DEMO ─────────────────────────── -->
-<section id="hotkeys" class="demo-section">
-  <div class="blob x" aria-hidden="true"></div>
-  <div class="blob y" aria-hidden="true"></div>
-  <div class="wrap" style="position:relative">
-    <div class="section-head">
-      <span class="section-eyebrow">HOTKEYS</span>
-      <h2 class="h">전부 입력할 필요 없어요</h2>
-      <p class="h-sub">자주 쓰는 답변과 코드, 형식을 단축키와 핫스트링에 연결해 두세요.<br>타이핑 도중 그대로 변환됩니다. 단축키는 변경할 수 있어요.</p>
-    </div>
-
-    <div class="demo-grid">
-      <div class="demo-card">
-        <h4>// HOTSTRING</h4>
-        <div class="trigger"><span class="key">;</span><span class="key">d</span><span class="key">a</span><span class="key">t</span><span class="key">e</span></div>
-        <div class="arrow">→ → →</div>
-        <div class="out">2026-05-10<span class="caret"></span></div>
-      </div>
-      <div class="demo-card">
-        <h4>// SNIPPET</h4>
-        <div class="trigger"><span class="key">Alt</span><span class="key">F1</span></div>
-        <div class="arrow">→ → →</div>
-        <div class="out">안녕하세요, <span class="gr">6PM Assistant</span> 사용자님.<br>문의해 주신 건에 대해 안내드립니다.<span class="caret"></span></div>
-      </div>
-      <div class="demo-card">
-        <h4>// SHORTCUT</h4>
-        <div class="trigger"><span class="key">Ctrl</span><span class="key">1</span></div>
-        <div class="arrow">→ → →</div>
-        <div class="out">배포 사이트 열기 + ID/PW 복사 완료<span class="caret"></span></div>
+        <div class="tour-panel" id="tour-panel"></div>
       </div>
     </div>
   </div>
@@ -902,14 +818,14 @@
       <h2>오늘은 6시에 퇴근하세요.</h2>
       <p>설치하고 단축키를 등록하는 데 5분이면 충분합니다. 6pm Assistant는 무료입니다.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://github.com/dynn1178/support_cdx/releases/download/v1.0.14/6PM.Assistant.exe">
+        <a class="btn btn-primary" href="https://github.com/dynn1178/support_cdx/releases/latest/download/6PM.Assistant.exe">
           6PM.Assistant.exe 다운로드 <span class="arrow">↓</span>
         </a>
         <a class="btn btn-ghost" href="https://github.com/dynn1178/support_cdx/releases" target="_blank" rel="noreferrer">
           전체 릴리즈 보기 →
         </a>
       </div>
-      <div class="cta-meta">Windows 10/11 · 약 25 MB · v1.0.14 · 무료 · 설치 후 자동 업데이트</div>
+      <div class="cta-meta">Windows 10/11 · 약 57 MB · 무료 · 설치 후 자동 업데이트</div>
     </div>
   </div>
 </section>
@@ -925,8 +841,9 @@
       </div>
     </div>
     <div class="links">
-      <a href="#features">기능</a>
-      <a href="#tour">스크린샷</a>
+      <a href="#features">도구</a>
+      <a href="#benefits">특장점</a>
+      <a href="#tour">화면</a>
       <a href="#download">다운로드</a>
       <a href="https://github.com/dynn1178/support_cdx" target="_blank" rel="noreferrer">GitHub</a>
       <a href="mailto:dynn1178@naver.com">문의</a>
@@ -950,20 +867,104 @@
     });
   });
 
-  // tour tabs
-  const tabs = document.querySelectorAll('#tabs .tab');
-  const panes = document.querySelectorAll('.panel-fade');
-  tabs.forEach(t => t.addEventListener('click', () => {
-    const id = t.dataset.id;
-    tabs.forEach(x => x.classList.toggle('active', x === t));
-    panes.forEach(p => p.classList.toggle('show', p.dataset.id === id));
+  // product screen accordion
+  const tourScreens = [
+    {n:'01', main:'홈', items:[{id:'home-main', n:'01', label:'홈', src:'assets/01_home.jpg', title:'홈', desc:'최근 사용, 자주 사용, 등록 일정과 등록 단축키를 한 화면에서 확인합니다.'}]},
+    {n:'02', main:'상용구/코드', items:[
+      {id:'text-general', n:'01', label:'일반 텍스트', src:'assets/02_Text_1.jpg', title:'상용구/코드 - 일반 텍스트', desc:'자주 쓰는 답변과 문구를 저장하고 즐겨찾기 또는 단축키로 바로 붙여넣습니다.'},
+      {id:'text-code', n:'02', label:'코드 스니펫', src:'assets/02_Text_2.jpg', title:'상용구/코드 - 코드 스니펫', desc:'반복해서 쓰는 쿼리와 코드 조각을 등록해 빠르게 복사합니다.'},
+      {id:'text-title', n:'03', label:'제목 생성', src:'assets/02_Text_3.jpg', title:'상용구/코드 - 제목 생성', desc:'날짜 변수와 보고 양식을 활용해 정해진 제목 형식을 쉽게 호출합니다.'},
+      {id:'text-hotstring', n:'04', label:'핫스트링', src:'assets/02_Text_4.jpg', title:'상용구/코드 - 핫스트링', desc:'짧은 약어를 입력하면 긴 문구나 URL, 코드로 즉시 변환합니다.'}
+    ]},
+    {n:'03', main:'바로가기', items:[
+      {id:'shortcut-site', n:'01', label:'사이트', src:'assets/03_shortcut_01.jpg', title:'바로가기 - 사이트', desc:'자주 찾는 사이트를 등록하고 필요할 때 바로 열 수 있습니다.'},
+      {id:'shortcut-file', n:'02', label:'파일/폴더', src:'assets/03_shortcut_02.jpg', title:'바로가기 - 파일/폴더', desc:'업무 파일과 폴더를 한곳에 모아 빠르게 실행합니다.'},
+      {id:'shortcut-search', n:'03', label:'바로검색', src:'assets/03_shortcut_03.jpg', title:'바로가기 - 바로검색', desc:'검색 사이트별 검색어 입력창을 등록해 원하는 검색을 즉시 시작합니다.'}
+    ]},
+    {n:'04', main:'클립보드', items:[{id:'clipboard-main', n:'01', label:'클립보드', src:'assets/04_clipboard.jpg', title:'클립보드', desc:'복사했던 텍스트와 이미지를 자동으로 보관하고 다시 가져옵니다.'}]},
+    {n:'05', main:'컨닝페이퍼', items:[
+      {id:'paper-sticky', n:'01', label:'스틸 컷', src:'assets/05_paper_1.jpg', title:'컨닝페이퍼 - 스틸 컷', desc:'참고 이미지를 화면 위에 띄워두고 필요한 내용을 빠르게 확인합니다.'},
+      {id:'paper-cunning', n:'02', label:'컨닝페이퍼', src:'assets/05_paper_2.jpg', title:'컨닝페이퍼', desc:'이미지, URL, 캡처 자료를 등록해 단축키로 불러옵니다.'}
+    ]},
+    {n:'06', main:'일정 관리', items:[
+      {id:'schedule-todo', n:'01', label:'To Do', src:'assets/06_sche_01.jpg', title:'일정 관리 - To Do', desc:'그룹별 체크리스트로 할 일을 관리하고 마감일과 우선순위를 확인합니다.'},
+      {id:'schedule-timer', n:'02', label:'타이머', src:'assets/06_sche_02.jpg', title:'일정 관리 - 타이머', desc:'시간 설정과 특정 시간 알림으로 집중 작업과 일정 알림을 관리합니다.'}
+    ]},
+    {n:'07', main:'메모', items:[{id:'memo-main', n:'01', label:'메모', src:'assets/07_memo_01.jpg', title:'메모', desc:'빠른 메모를 저장하고 필요한 메모는 스티커처럼 띄워둡니다.'}]},
+    {n:'08', main:'매크로', items:[{id:'macro-main', n:'01', label:'매크로', src:'assets/08_macro_01.jpg', title:'매크로', desc:'마우스와 키보드 동작을 녹화하고 반복 재생합니다.'}]},
+    {n:'09', main:'계산기', items:[
+      {id:'calc-expression', n:'01', label:'연산 계산', src:'assets/09_calc_1.jpg', title:'계산기 - 연산 계산', desc:'수식을 계산하고 결과를 복사하며 계산 내역을 확인합니다.'},
+      {id:'calc-date', n:'02', label:'날짜 계산', src:'assets/09_calc_2.jpg', title:'계산기 - 날짜 계산', desc:'기준 날짜와 계산값으로 업무에 필요한 날짜를 빠르게 구합니다.'}
+    ]},
+    {n:'10', main:'텍스트 변환', items:[
+      {id:'convert-url', n:'01', label:'URL 인코딩', src:'assets/10_text_change_1.jpg', title:'텍스트 변환 - URL 인코딩', desc:'URL 인코딩과 디코딩 결과를 바로 복사합니다.'},
+      {id:'convert-utm', n:'02', label:'UTM', src:'assets/10_text_change_2.jpg', title:'텍스트 변환 - UTM', desc:'UTM 파라미터를 분해하거나 조합해 URL을 정리합니다.'},
+      {id:'convert-line', n:'03', label:'줄바꿈/따옴표', src:'assets/10_text_change_3.jpg', title:'텍스트 변환 - 줄바꿈/따옴표', desc:'줄바꿈, 쉼표, 따옴표 변환처럼 자주 쓰는 텍스트 정리를 처리합니다.'},
+      {id:'convert-case', n:'04', label:'대소문자 변환', src:'assets/10_text_change_4.jpg', title:'텍스트 변환 - 대소문자 변환', desc:'UPPER_CASE, camelCase, PascalCase 형식을 순환 변환합니다.'}
+    ]},
+    {n:'11', main:'피커/기타', items:[
+      {id:'picker-color', n:'01', label:'컬러', src:'assets/11_picker_1.jpg', title:'피커/기타 - 컬러', desc:'HEX, RGB, HSL 색상 값을 확인하고 화면에서 색을 찍어 복사합니다.'},
+      {id:'picker-mouse', n:'02', label:'마우스 하이라이트', src:'assets/11_picker_2.jpg', title:'피커/기타 - 마우스 하이라이트', desc:'화면 공유와 시연 중 커서 위치를 강조합니다.'},
+      {id:'picker-image', n:'03', label:'이미지', src:'assets/11_picker_3.jpg', title:'피커/기타 - 이미지', desc:'자주 쓰는 이모지와 이미지를 모아 빠르게 선택합니다.'},
+      {id:'picker-symbol', n:'04', label:'특수문자', src:'assets/11_picker_4.jpg', title:'피커/기타 - 특수문자', desc:'기호, 화살표, 수학 기호, 단위 문자를 한 화면에서 선택합니다.'}
+    ]},
+    {n:'12', main:'설정', items:[
+      {id:'setting-general', n:'01', label:'일반', src:'assets/12_setting_1.jpg', title:'설정 - 일반', desc:'프리셋, 창 옵션, 클립보드 개수, 업데이트 확인 방식을 설정합니다.'},
+      {id:'setting-hotkey', n:'02', label:'단축키', src:'assets/12_setting_2.jpg', title:'설정 - 단축키', desc:'클립보드, 메모, 상용구, 스틸 컷 단축키를 원하는 조합으로 지정합니다.'},
+      {id:'setting-theme', n:'03', label:'테마', src:'assets/12_setting_3.jpg', title:'설정 - 테마', desc:'밝은 테마, 어두운 테마와 색상 테마를 선택합니다.'}
+    ]}
+  ];
+
+  const tabsEl = document.getElementById('tabs');
+  const panelEl = document.getElementById('tour-panel');
+  if (tabsEl && panelEl) {
+    tabsEl.innerHTML = tourScreens.map((group, gi) => `
+      <div class="tab-group${gi === 0 ? ' active' : ''}">
+        <button class="tab-main" type="button"><span class="main-label"><span class="tnum">${group.n}</span>${group.main}</span><span class="chev">›</span></button>
+        <div class="subtabs">
+          ${group.items.map((item, ii) => `<button class="tab${gi === 0 && ii === 0 ? ' active' : ''}" data-id="${item.id}"><span class="tnum">${item.n}</span>${item.label}</button>`).join('')}
+        </div>
+      </div>
+    `).join('');
+    panelEl.innerHTML = tourScreens.flatMap(group => group.items).map((item, i) => `
+      <div class="panel-fade${i === 0 ? ' show' : ''}" data-id="${item.id}">
+        <div class="pic"><img src="${item.src}" alt="${item.title} 화면"></div>
+        <div class="tour-caption"><div><h4>${item.title}</h4><p>${item.desc}</p></div></div>
+      </div>
+    `).join('');
+
+    const tabs = document.querySelectorAll('#tabs .tab');
+    const panes = document.querySelectorAll('.panel-fade');
+    document.querySelectorAll('#tabs .tab-main').forEach(m => {
+      m.addEventListener('click', () => {
+        const group = m.closest('.tab-group');
+        const isOpen = group.classList.contains('active');
+        document.querySelectorAll('#tabs .tab-group').forEach(g => g.classList.remove('active'));
+        if (!isOpen) group.classList.add('active');
+      });
+    });
+    tabs.forEach(t => t.addEventListener('click', () => {
+      const id = t.dataset.id;
+      tabs.forEach(x => x.classList.toggle('active', x === t));
+      panes.forEach(p => p.classList.toggle('show', p.dataset.id === id));
+      document.querySelectorAll('#tabs .tab-group').forEach(g => g.classList.toggle('active', g.contains(t)));
+    }));
+  }
+
+  // use case tabs
+  const usecaseTabs = document.querySelectorAll('#usecases .usecase-tab');
+  const usecasePanels = document.querySelectorAll('#usecases .usecase-panel');
+  usecaseTabs.forEach(t => t.addEventListener('click', () => {
+    const id = t.dataset.case;
+    usecaseTabs.forEach(x => x.classList.toggle('active', x === t));
+    usecasePanels.forEach(p => p.classList.toggle('show', p.dataset.case === id));
   }));
 
   // reveal on scroll
   const io = new IntersectionObserver(es => {
     es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:.12});
-  document.querySelectorAll('.feat, .section-head, .stage, .cta-card, .demo-card, .strip-grid > div').forEach(el => {
+  document.querySelectorAll('.feat, .section-head, .stage, .cta-card, .demo-card, .usecases, .strip-grid > div').forEach(el => {
     el.classList.add('reveal'); io.observe(el);
   });
 </script>
